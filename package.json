@@ -2,8 +2,8 @@
   "name": "@aboutbits/react-toolbox",
   "version": "0.0.4",
   "description": "Tools for React",
-  "main": "dist/",
-  "module": "dist/esm",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:node && npm run build:esm",

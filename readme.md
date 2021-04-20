@@ -6,9 +6,9 @@ This package includes different tools that support you with common tasks.
 ## Table of content
 
 - [Usage](#usage)
-- [Build & Publish](#build--publish)
   - [useInterval](#useinterval)
   - [Async Data](#async-data)
+- [Build & Publish](#build--publish)
 - [Information](#information)
 
 ## Usage
