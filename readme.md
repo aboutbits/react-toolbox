@@ -8,6 +8,7 @@ This package includes different tools that support you with common tasks.
 - [Usage](#usage)
 - [Build & Publish](#build--publish)
   - [useInterval](#useinterval)
+  - [Async Data](#async-data)
 - [Information](#information)
 
 ## Usage
@@ -15,7 +16,7 @@ This package includes different tools that support you with common tasks.
 First, you have to install the package:
 
 ```bash
-npm install @aboutbits/react-tooling
+npm install @aboutbits/react-toolbox
 ```
 
 Second, you can make use of the different tools.
@@ -29,9 +30,9 @@ The hook takes two parameters:
 - `callback`: The callback function that should be executed.
 - `delay`: The delay in milliseconds or null, if the interval should be paused.
 
-```jsx
+```tsx
 import React, { useState } from 'react'
-import { useInterval } from '@aboutbits/react-tooling'
+import { useInterval } from '@aboutbits/react-toolbox'
 
 const MyCommponent = () => {
   const [step, setStep] = useState(10)
@@ -41,6 +42,72 @@ const MyCommponent = () => {
   }, step === 0 ? null : 1000)
 
   return <p>Countdown: {step}</p>
+}
+``` 
+
+### Async Data
+
+This part includes a utility component, that can be used to render loading, success and error views based on async state.
+
+```tsx
+import React, { useEffect } from 'react'
+import { AsyncView } from '@aboutbits/react-toolbox'
+
+type Data = {
+    greeting: string
+}
+
+type Error = {
+    message: string
+}
+
+const MyCommponent = () => {
+    const [data, setData] = useState<Data | undefined>()
+    const [error, setError] = useState<Error | undefined>()
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos/1')
+            .then(response => setData(response.json()))
+            .catch(error => setError(error))
+    })
+
+    return (
+        <AsyncView
+            data={data}
+            error={error}
+            renderLoading={<div>Loading</div>}
+            renderSuccess={(data) => <div>{data.greeting}</div>}
+            renderError={(error) => <div>{error.message}</div>} />
+    );
+}
+```
+
+And using SWR:
+
+```tsx
+import React, { useEffect } from 'react'
+import { useSWR } from 'swr'
+import { AsyncView } from '@aboutbits/react-toolbox'
+
+type Data = {
+    greeting: string
+}
+
+type Error = {
+    message: string
+}
+
+const MyCommponent = () => {
+    const { data, error } = useSWR('https://jsonplaceholder.typicode.com/todos/1')
+    
+    return (
+        <AsyncView
+            data={data}
+            error={error}
+            renderLoading={'Loading'}
+            renderSuccess={'Success'}
+            renderError={'Error'} />
+    );
 }
 ``` 
 
@@ -64,6 +131,7 @@ For support, please contact [info@aboutbits.it](mailto:info@aboutbits.it).
 
 ### Credits
 
+- [Martin Malfertheiner](https://github.com/mmalfertheiner)
 - [Alex Lanz](https://github.com/alexlanz)
 - [All Contributors](../../contributors)
 
