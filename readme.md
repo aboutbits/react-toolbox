@@ -38,7 +38,7 @@ const MyCommponent = () => {
   
   useInterval(() => {
     setStep(step - 1)
-  }, step === 0 ? 1000 : null)
+  }, step === 0 ? null : 1000)
 
   return <p>Countdown: {step}</p>
 }
