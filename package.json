@@ -1,5 +1,5 @@
 {
-  "name": "@aboutbits/react-tooling",
+  "name": "@aboutbits/react-toolbox",
   "version": "0.0.0",
   "description": "Tools for React",
   "main": "dist/",
@@ -15,20 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aboutbits/react-tooling"
+    "url": "git+https://github.com/aboutbits/react-toolbox"
   },
   "private": false,
   "keywords": [
     "react",
+    "toolbox",
     "tooling",
     "tools"
   ],
   "author": "About Bits",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aboutbits/react-tooling/issues"
+    "url": "https://github.com/aboutbits/react-toolbox/issues"
   },
-  "homepage": "https://github.com/aboutbits/react-tooling#readme",
+  "homepage": "https://github.com/aboutbits/react-toolbox#readme",
   "files": [
     "readme.md",
     "dist/**/*"
