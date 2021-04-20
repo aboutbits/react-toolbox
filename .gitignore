@@ -1,0 +1,12 @@
+
+# Basic
+.DS_Store
+
+# IDE
+/.idea
+/.vscode
+
+# Project
+/package-lock.json
+/node_modules
+/dist

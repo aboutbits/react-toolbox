@@ -1,0 +1,35 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "plugins": [
+        "prettier",
+        "@typescript-eslint",
+        "jest",
+        "import"
+    ],
+    "extends": [
+        "prettier",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/typescript"
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "import/namespace": "off",
+        "import/order": [
+            "error"
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/member-delimiter-style": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-extra-semi": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+    }
+}
