@@ -34,13 +34,13 @@ import React, { useState } from 'react'
 import { useInterval } from '@aboutbits/react-tooling'
 
 const MyCommponent = () => {
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(10)
   
   useInterval(() => {
-    setStep(step + 1)
-  }, step < 10 ? 1000 : null)
+    setStep(step - 1)
+  }, step === 0 ? 1000 : null)
 
-  return <p>{step}</p>
+  return <p>Countdown: {step}</p>
 }
 ``` 
 
