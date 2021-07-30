@@ -1,6 +1,8 @@
 React Toolbox
 =============
 
+[![npm version](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox.svg)](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox)
+
 This package includes different tools that support you with common tasks.
 
 ## Table of content
