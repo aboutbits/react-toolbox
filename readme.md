@@ -2,6 +2,7 @@ React Toolbox
 =============
 
 [![npm version](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox.svg)](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox)
+[![GitHub license](https://img.shields.io/github/license/aboutbits/react-toolbox)](https://github.com/aboutbits/react-toolbox/blob/main/license.md)
 
 This package includes different tools that support you with common tasks.
 
