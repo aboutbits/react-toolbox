@@ -4,7 +4,7 @@ import { useInterval } from '../index'
 import { getCurrentLocation } from './getCurrentLocation'
 
 export type LocationContextValue = {
-  location: Position | null
+  location: GeolocationPosition | null
 }
 
 export const LocationContext = createContext<LocationContextValue>({

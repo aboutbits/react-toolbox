@@ -1,10 +1,12 @@
-const getCurrentLocation = (highAccuracy = false): Promise<Position> => {
-  return new Promise<Position>((resolve, reject) => {
-    const successCallback = (position: Position): void => {
+const getCurrentLocation = (
+  highAccuracy = false
+): Promise<GeolocationPosition> => {
+  return new Promise<GeolocationPosition>((resolve, reject) => {
+    const successCallback = (position: GeolocationPosition): void => {
       resolve(position)
     }
 
-    const errorCallback = (error: PositionError) => {
+    const errorCallback = (error: GeolocationPositionError) => {
       reject(error.message)
     }
 
