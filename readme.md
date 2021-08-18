@@ -11,6 +11,7 @@ This package includes different tools that support you with common tasks.
 - [Usage](#usage)
   - [useInterval](#useinterval)
   - [Async Data](#async-data)
+  - [LocationProvider](#locationprovider)
 - [Build & Publish](#build--publish)
 - [Information](#information)
 
