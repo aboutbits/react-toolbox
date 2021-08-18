@@ -132,7 +132,7 @@ const MyApp = () => {
 ```
 
 The context provider takes two props:
-- `highAccuracy`: define if the location should be fetched with high accuracy. Read more on the [Geolocation API doc](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
+- `highAccuracy`: defines if the location should be fetched with high accuracy. Read more on the [Geolocation API doc](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
 - `delay`: the delay in milliseconds between each fetch
 
 ```tsx
