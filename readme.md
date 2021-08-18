@@ -114,6 +114,38 @@ const MyCommponent = () => {
 }
 ``` 
 
+### LocationProvider
+
+This part includes a React context that fetches the geolocation at a given interval.
+
+```tsx
+import { LocationProvider } from '@aboutbits/react-toolbox'
+
+const MyApp = () => {
+  
+  return (
+    <LocationProvider highAccuracy={true} delay={20000}>
+      {children}
+    </LocationProvider>
+  )
+}
+```
+
+The context provider takes two props:
+- `highAccuracy`: define if the location should be fetched with high accuracy. Read more on the [Geolocation API doc](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
+- `delay`: the delay in milliseconds between each fetch
+
+```tsx
+import { useContext } from 'react'
+import { LocationContext } from '@aboutbits/react-toolbox'
+
+const MyComponent = () => {
+  const { location } = useContext(LocationContext)
+  
+  return null
+}
+```
+
 ## Build & Publish
 
 To publish the package commit all changes and push them to main. Then run one of the following commands locally:
