@@ -143,7 +143,9 @@ import { LocationContext } from '@aboutbits/react-toolbox'
 const MyComponent = () => {
   const { location } = useContext(LocationContext)
   
-  return null
+  return location 
+      ? <div>Your location is: {location.coords.latitude}, {location.coords.longitude}</div>
+      : <div>Unable to get your location</div>
 }
 ```
 
