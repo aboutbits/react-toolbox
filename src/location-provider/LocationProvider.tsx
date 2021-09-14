@@ -19,11 +19,14 @@ export const LocationProvider: React.FC<{
     location: null,
   })
 
-  const updateLocation = async () => {
-    const position = await getCurrentLocation(highAccuracy).catch(
-      () => location.location
-    )
-    setLocation({ location: position })
+  const updateLocation = () => {
+    getCurrentLocation(highAccuracy)
+      .then((position) => {
+        setLocation({ location: position })
+      })
+      .catch(() => {
+        setLocation({ location: null })
+      })
   }
 
   useEffect(() => {
