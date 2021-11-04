@@ -6,6 +6,7 @@ import {
   LocationContext,
   LocationContextValue,
 } from './location-provider/LocationProvider'
+import { useMatchMediaQuery } from './useMatchMediaQuery/useMatchMediaQuery'
 
 export {
   useInterval,
@@ -15,4 +16,5 @@ export {
   LocationProvider,
   LocationContext,
   LocationContextValue,
+  useMatchMediaQuery,
 }

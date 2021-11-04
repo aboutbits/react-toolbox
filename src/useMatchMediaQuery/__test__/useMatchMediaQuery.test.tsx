@@ -1,7 +1,7 @@
 import React from 'react'
 import isMatching from 'css-mediaquery'
 import { render, RenderResult } from '@testing-library/react'
-import useMatchMediaQuery from '../useMatchMediaQuery'
+import { useMatchMediaQuery } from '../useMatchMediaQuery'
 
 beforeEach(() => {
   // mock window.matchMedia (use 'css-mediaquery')
