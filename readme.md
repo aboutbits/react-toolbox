@@ -12,6 +12,7 @@ This package includes different tools that support you with common tasks.
   - [useInterval](#useinterval)
   - [Async Data](#async-data)
   - [LocationProvider](#locationprovider)
+  - [useMatchMediaQuery](#usematchmediaquery)
 - [Build & Publish](#build--publish)
 - [Information](#information)
 
@@ -146,6 +147,20 @@ const MyComponent = () => {
   return location 
       ? <div>Your location is: {location.coords.latitude}, {location.coords.longitude}</div>
       : <div>Unable to get your location</div>
+}
+```
+
+### useMatchMediaQuery
+
+This hook is based on the `window.matchQuery` API and can be used to find out if a certain media query matches the current window.
+
+```tsx
+import { useMatchMediaQuery } from '@aboutbits/react-toolbox'
+
+const TestComponent = () => {
+  const matches = useMatchMediaQuery('(min-width : 500px)')
+  if (matches) return <div>visible</div>
+  return null
 }
 ```
 
