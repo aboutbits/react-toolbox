@@ -1,4 +1,4 @@
-import { cleanup, renderHook } from '@testing-library/react-hooks'
+import { cleanup, renderHook } from '@testing-library/react'
 import { useInterval } from '../useInterval'
 
 afterEach(cleanup)
