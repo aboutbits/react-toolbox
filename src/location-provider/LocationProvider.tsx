@@ -14,6 +14,7 @@ export const LocationContext = createContext<LocationContextValue>({
 export const LocationProvider: React.FC<{
   highAccuracy: boolean
   delay: number
+  children?: React.ReactNode
 }> = ({ highAccuracy, delay, children }) => {
   const [location, setLocation] = useState<LocationContextValue>({
     location: null,

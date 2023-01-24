@@ -39,7 +39,11 @@ const AsyncView = <Data, Error>(
         <>{renderSuccess}</>
       )
     case AsyncState.FINISHED_WITH_ERROR:
-      return isFunction(renderError) ? renderError(error) : <>{renderError}</>
+      return isFunction(renderError) ? (
+        renderError(error as Error)
+      ) : (
+        <>{renderError}</>
+      )
   }
 }
 
