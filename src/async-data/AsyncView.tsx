@@ -1,7 +1,5 @@
 import React from 'react'
 import { isFunction } from '../util'
-import { AsyncState } from '../index'
-import { getAsyncState } from './asyncState'
 
 type LoadingFunction = () => React.ReactElement<any, any> | null
 type SuccessFunction<Data> = (data: Data) => React.ReactElement<any, any> | null
@@ -27,23 +25,16 @@ const AsyncView = <Data, Error>(
     renderSuccess,
     renderError = null,
   } = props
-  const asyncState = getAsyncState(data, error)
-
-  switch (asyncState) {
-    case AsyncState.FETCHING:
-      return isFunction(renderLoading) ? renderLoading() : <>{renderLoading}</>
-    case AsyncState.FINISHED_WITH_SUCCESS:
-      return isFunction(renderSuccess) ? (
-        renderSuccess(data as Data)
-      ) : (
-        <>{renderSuccess}</>
-      )
-    case AsyncState.FINISHED_WITH_ERROR:
-      return isFunction(renderError) ? (
-        renderError(error as Error)
-      ) : (
-        <>{renderError}</>
-      )
+  if (error != null && error != undefined) {
+    return isFunction(renderError) ? renderError(error) : <>{renderError}</>
+  } else if (data != null && data != undefined) {
+    return isFunction(renderSuccess) ? (
+      renderSuccess(data)
+    ) : (
+      <>{renderSuccess}</>
+    )
+  } else {
+    return isFunction(renderLoading) ? renderLoading() : <>{renderLoading}</>
   }
 }
 
