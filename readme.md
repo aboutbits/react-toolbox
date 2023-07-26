@@ -1,5 +1,4 @@
-React Toolbox
-=============
+# React Toolbox
 
 [![npm package](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox.svg)](https://badge.fury.io/js/%40aboutbits%2Freact-toolbox)
 [![license](https://img.shields.io/github/license/aboutbits/react-toolbox)](https://github.com/aboutbits/react-toolbox/blob/main/license.md)
@@ -13,6 +12,8 @@ This package includes different tools that support you with common tasks.
   - [Async Data](#async-data)
   - [LocationProvider](#locationprovider)
   - [useMatchMediaQuery](#usematchmediaquery)
+  - [useDebounce](#usedebounce)
+  - [useIsMounted](#useismounted)
 - [Build & Publish](#build--publish)
 - [Information](#information)
 
@@ -41,14 +42,17 @@ import { useInterval } from '@aboutbits/react-toolbox'
 
 const MyCommponent = () => {
   const [step, setStep] = useState(10)
-  
-  useInterval(() => {
-    setStep(step - 1)
-  }, step === 0 ? null : 1000)
+
+  useInterval(
+    () => {
+      setStep(step - 1)
+    },
+    step === 0 ? null : 1000
+  )
 
   return <p>Countdown: {step}</p>
 }
-``` 
+```
 
 ### Async Data
 
@@ -59,31 +63,32 @@ import React, { useEffect } from 'react'
 import { AsyncView } from '@aboutbits/react-toolbox'
 
 type Data = {
-    greeting: string
+  greeting: string
 }
 
 type Error = {
-    message: string
+  message: string
 }
 
 const MyCommponent = () => {
-    const [data, setData] = useState<Data | undefined>()
-    const [error, setError] = useState<Error | undefined>()
+  const [data, setData] = useState<Data | undefined>()
+  const [error, setError] = useState<Error | undefined>()
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-            .then(response => setData(response.json()))
-            .catch(error => setError(error))
-    })
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => setData(response.json()))
+      .catch((error) => setError(error))
+  })
 
-    return (
-        <AsyncView
-            data={data}
-            error={error}
-            renderLoading={<div>Loading</div>}
-            renderSuccess={(data) => <div>{data.greeting}</div>}
-            renderError={(error) => <div>{error.message}</div>} />
-    );
+  return (
+    <AsyncView
+      data={data}
+      error={error}
+      renderLoading={<div>Loading</div>}
+      renderSuccess={(data) => <div>{data.greeting}</div>}
+      renderError={(error) => <div>{error.message}</div>}
+    />
+  )
 }
 ```
 
@@ -95,26 +100,27 @@ import { useSWR } from 'swr'
 import { AsyncView } from '@aboutbits/react-toolbox'
 
 type Data = {
-    greeting: string
+  greeting: string
 }
 
 type Error = {
-    message: string
+  message: string
 }
 
 const MyCommponent = () => {
-    const { data, error } = useSWR('https://jsonplaceholder.typicode.com/todos/1')
-    
-    return (
-        <AsyncView
-            data={data}
-            error={error}
-            renderLoading={'Loading'}
-            renderSuccess={'Success'}
-            renderError={'Error'} />
-    );
+  const { data, error } = useSWR('https://jsonplaceholder.typicode.com/todos/1')
+
+  return (
+    <AsyncView
+      data={data}
+      error={error}
+      renderLoading={'Loading'}
+      renderSuccess={'Success'}
+      renderError={'Error'}
+    />
+  )
 }
-``` 
+```
 
 ### LocationProvider
 
@@ -124,7 +130,6 @@ This part includes a React context that fetches the geolocation at a given inter
 import { LocationProvider } from '@aboutbits/react-toolbox'
 
 const MyApp = () => {
-  
   return (
     <LocationProvider highAccuracy={true} delay={20000}>
       {children}
@@ -134,6 +139,7 @@ const MyApp = () => {
 ```
 
 The context provider takes two props:
+
 - `highAccuracy`: defines if the location should be fetched with high accuracy. Read more on the [Geolocation API doc](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
 - `delay`: the delay in milliseconds between each fetch
 
@@ -143,10 +149,14 @@ import { LocationContext } from '@aboutbits/react-toolbox'
 
 const MyComponent = () => {
   const { location } = useContext(LocationContext)
-  
-  return location 
-      ? <div>Your location is: {location.coords.latitude}, {location.coords.longitude}</div>
-      : <div>Unable to get your location</div>
+
+  return location ? (
+    <div>
+      Your location is: {location.coords.latitude}, {location.coords.longitude}
+    </div>
+  ) : (
+    <div>Unable to get your location</div>
+  )
 }
 ```
 
@@ -161,6 +171,76 @@ const TestComponent = () => {
   const matches = useMatchMediaQuery('(min-width : 500px)')
   if (matches) return <div>visible</div>
   return null
+}
+```
+
+### useDebounce
+
+Use this hook to prevent the component from re-rendering too many times. Useful to avoid making unnecessary API calls.
+
+```tsx
+export default function TestComponent() {
+  const [value, setValue] = useState('')
+  const debouncedValue = useDebounce(value, 500)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+  }
+
+  // Fetch API (optional)
+  useEffect(() => {
+    // Do fetch here...
+    // Triggers when "debouncedValue" changes
+  }, [debouncedValue])
+
+  return (
+    <div>
+      <p>Value real-time: {value}</p>
+      <p>Debounced value: {debouncedValue}</p>
+      <input type="text" value={value} onChange={handleChange} />
+    </div>
+  )
+}
+```
+
+### useIsMounted
+
+In React, a component is deleted from memory once unmounted. Changing the state in an unmounted component will result in an error.
+This is preferrably solved passing a cleanup function to [useEffect](https://react.dev/reference/react/useEffect#useeffect).
+However, there are some cases like Promise or API calls where it's impossible to know if the component is still mounted at the resolve time.
+This hook returns a function that can be used to verify at the resolve time whether the component is still mounted.
+
+```tsx
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+function Child() {
+  const [data, setData] = useState('loading')
+  const isMounted = useIsMounted()
+
+  // simulate an api call and update state
+  useEffect(() => {
+    void delay(3000).then(() => {
+      if (isMounted()) {
+        setData('OK')
+      }
+    })
+  }, [isMounted])
+
+  return <p>{data}</p>
+}
+
+export default function TestComponent() {
+  const [isVisible, setVisible] = useState<boolean>(false)
+
+  const toggleVisibility = () => setVisible((state) => !state)
+
+  return (
+    <>
+      <button onClick={toggleVisibility}>{isVisible ? 'Hide' : 'Show'}</button>
+
+      {isVisible && <Child />}
+    </>
+  )
 }
 ```
 
