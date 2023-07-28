@@ -1,15 +1,19 @@
 name: Test Package
+
 on: push
+
+env:
+  NODE_VERSION: 16
+
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: aboutbits/github-actions-node/setup-and-install@v1
         with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm install
+          node-version: ${{ env.NODE_VERSION }}
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test
