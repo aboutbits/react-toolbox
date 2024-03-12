@@ -2,8 +2,8 @@ import React, { ReactElement, ReactNode } from 'react'
 import { isFunction } from '../util'
 
 type LoadingFunction = () => ReactNode
-type SuccessFunction<Data> = (data: Data) => ReactNode
-type ErrorFunction<Error> = (error: Error) => ReactNode
+type SuccessFunction<Data> = (data: NonNullable<Data>) => ReactNode
+type ErrorFunction<Error> = (error: NonNullable<Error>) => ReactNode
 
 type Props<Data, Error> = {
   data?: Data
@@ -24,9 +24,9 @@ const AsyncView = <Data, Error>(
     renderSuccess,
     renderError = null,
   } = props
-  if (error != null && error != undefined) {
+  if (error !== null && error !== undefined) {
     return <>{isFunction(renderError) ? renderError(error) : renderError}</>
-  } else if (data != null && data != undefined) {
+  } else if (data !== null && data !== undefined) {
     return (
       <>{isFunction(renderSuccess) ? renderSuccess(data) : renderSuccess}</>
     )
