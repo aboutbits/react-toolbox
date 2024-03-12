@@ -1,23 +1,22 @@
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { isFunction } from '../util'
 
-type LoadingFunction = () => React.ReactElement<any, any> | null
-type SuccessFunction<Data> = (data: Data) => React.ReactElement<any, any> | null
-type ErrorFunction<Error> = (
-  error: Error
-) => React.ReactElement<any, any> | null
+type LoadingFunction = () => ReactNode
+type SuccessFunction<Data> = (data: NonNullable<Data>) => ReactNode
+type ErrorFunction<Error> = (error: NonNullable<Error>) => ReactNode
 
 type Props<Data, Error> = {
   data?: Data
   error?: Error
-  renderLoading?: React.ReactNode | LoadingFunction
-  renderSuccess: React.ReactNode | SuccessFunction<Data>
-  renderError?: React.ReactNode | ErrorFunction<Error>
+  renderLoading?: ReactNode | LoadingFunction
+  renderSuccess: ReactNode | SuccessFunction<Data>
+  renderError?: ReactNode | ErrorFunction<Error>
 }
 
 const AsyncView = <Data, Error>(
   props: Props<Data, Error>
-): React.ReactElement<any, any> | null => {
+  // The `ReactElement<any, any> | null` type is for React 17 compatibility (see type FunctionComponent). With React 18 it can be a ReactNode and we can remove the Fragment wrappers.
+): ReactElement<any, any> | null => {
   const {
     data,
     error,
@@ -25,16 +24,14 @@ const AsyncView = <Data, Error>(
     renderSuccess,
     renderError = null,
   } = props
-  if (error != null && error != undefined) {
-    return isFunction(renderError) ? renderError(error) : <>{renderError}</>
-  } else if (data != null && data != undefined) {
-    return isFunction(renderSuccess) ? (
-      renderSuccess(data)
-    ) : (
-      <>{renderSuccess}</>
+  if (error !== null && error !== undefined) {
+    return <>{isFunction(renderError) ? renderError(error) : renderError}</>
+  } else if (data !== null && data !== undefined) {
+    return (
+      <>{isFunction(renderSuccess) ? renderSuccess(data) : renderSuccess}</>
     )
   } else {
-    return isFunction(renderLoading) ? renderLoading() : <>{renderLoading}</>
+    return <>{isFunction(renderLoading) ? renderLoading() : renderLoading}</>
   }
 }
 
