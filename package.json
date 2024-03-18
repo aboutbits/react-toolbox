@@ -6,8 +6,8 @@
   "module": "dist/esm/index.js",
   "sideEffects": false,
   "engines": {
-    "npm": "^8",
-    "node": "^16"
+    "npm": ">=8",
+    "node": ">=16"
   },
   "scripts": {
     "build": "npm run build:node && npm run build:esm",
