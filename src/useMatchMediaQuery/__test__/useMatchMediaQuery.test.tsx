@@ -39,7 +39,7 @@ describe('useReactSimpleMatchMedia', () => {
 
   it('should be visible if between matches', () => {
     const { getByText } = renderTestComponent(
-      '(min-width : 500px) and (max-width: 600px)'
+      '(min-width : 500px) and (max-width: 600px)',
     )
     expect(getByText(/visible/i)).toBeInTheDocument()
   })
