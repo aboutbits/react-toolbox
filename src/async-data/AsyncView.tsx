@@ -14,7 +14,7 @@ type Props<Data, Error> = {
 }
 
 const AsyncView = <Data, Error>(
-  props: Props<Data, Error>
+  props: Props<Data, Error>,
   // The `ReactElement<any, any> | null` type is for React 17 compatibility (see type FunctionComponent). With React 18 it can be a ReactNode and we can remove the Fragment wrappers.
 ): ReactElement<any, any> | null => {
   const {

@@ -1,5 +1,5 @@
 const getCurrentLocation = (
-  highAccuracy = false
+  highAccuracy = false,
 ): Promise<GeolocationPosition> => {
   return new Promise<GeolocationPosition>((resolve, reject) => {
     const successCallback = (position: GeolocationPosition): void => {

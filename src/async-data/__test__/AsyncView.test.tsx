@@ -30,7 +30,7 @@ function renderAsyncView(data?: Data, error?: Error): RenderResult {
       renderLoading={<Loading />}
       renderSuccess={(data) => <Success data={data} />}
       renderError={(error) => <Error error={error} />}
-    />
+    />,
   )
 }
 
