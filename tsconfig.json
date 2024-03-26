@@ -1,13 +1,9 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "jsx": "react",
-      "esModuleInterop": true,
-      "outDir": "./dist",
-      "declaration": true,
-      "strict": true,
-      "sourceMap": true
-    },
-    "include": ["src", "./jest-setup.ts"],
-    "exclude": ["node_modules", "**/__test__/*", "**/__tests__/*"]
+  "extends": "@aboutbits/ts-config/react",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist", "**/__test__/*", "**/__tests__/*"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
 }
