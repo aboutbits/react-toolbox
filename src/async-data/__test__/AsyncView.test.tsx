@@ -64,14 +64,14 @@ test('should render success if asyncState is successful', function () {
 test.each([null, undefined])(
   'should throw asyncState is successful but data is missing',
   function (value) {
-    expect(renderAsyncView({ isLoading: false, data: value })).toThrow()
+    expect(() => renderAsyncView({ isLoading: false, data: value })).toThrow()
   },
 )
 
 test.each([null, undefined])(
   'should render success if asyncState is successful but data is missing but allowed',
   function (value) {
-    expect(
+    expect(() =>
       renderAsyncView({
         isLoading: false,
         data: value,
