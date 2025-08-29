@@ -1,4 +1,4 @@
-name: Test Package
+name: Main
 
 on: push
 
@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node_version: [ 18, 20, 22 ]
+        node_version: [18, 20, 22]
     steps:
       - uses: actions/checkout@v4
       - uses: aboutbits/github-actions-node/setup-and-install@v2
@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node_version: [ 18, 20, 22 ]
+        node_version: [18, 20, 22]
     steps:
       - uses: actions/checkout@v4
       - uses: aboutbits/github-actions-node/setup-and-install@v2
