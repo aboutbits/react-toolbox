@@ -14,8 +14,8 @@ jobs:
       matrix:
         node_version: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: aboutbits/github-actions-node/setup-and-install@v2
+      - uses: actions/checkout@v5
+      - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
       - name: Lint
@@ -32,8 +32,8 @@ jobs:
       matrix:
         node_version: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: aboutbits/github-actions-node/setup-and-install@v2
+      - uses: actions/checkout@v5
+      - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
       - name: Test
