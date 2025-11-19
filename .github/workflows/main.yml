@@ -18,6 +18,8 @@ jobs:
       - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
+          registry-url: 'https://npm.pkg.github.com'
+          registry-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Lint
         run: npm run lint
         shell: bash
@@ -36,6 +38,8 @@ jobs:
       - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
+          registry-url: 'https://npm.pkg.github.com'
+          registry-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Test
         run: npm run test
         shell: bash
