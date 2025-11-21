@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { isFunction } from '../util'
 
 type LoadingFunction = () => ReactNode
@@ -6,9 +6,21 @@ type SuccessFunction<Data> = (data: Data) => ReactNode
 type ErrorFunction<Error> = (error: NonNullable<Error>) => ReactNode
 
 type Props<Data, Error> = {
-  data?: Data
-  error?: Error
-  isLoading: boolean
+  /**
+   * The async data to show.
+   * Note that `error` and `isLoading` take precedence over data.
+   */
+  data: Data | undefined
+  /**
+   * Set an error to show the error state.
+   * Note that `isLoading` takes precedence over error.
+   */
+  error: Error | undefined
+  /**
+   * Set to a boolean value to explicitly control loading state.
+   * If undefined, loading state is shown when there is no data (null | undefined) and no error (null | undefined).
+   */
+  isLoading: boolean | undefined
   renderLoading?: ReactNode | LoadingFunction
   renderError?: ReactNode | ErrorFunction<Error>
 } & (
@@ -36,15 +48,18 @@ const AsyncView = <Data, Error>(
     allowMissingData = false,
   } = props
 
-  if (isLoading) {
+  const isError = error !== null && error !== undefined
+  const hasData = data !== null && data !== undefined
+
+  if (isLoading || (isLoading === undefined && !hasData && !isError)) {
     return <>{isFunction(renderLoading) ? renderLoading() : renderLoading}</>
   }
 
-  if (error !== null && error !== undefined) {
+  if (isError) {
     return <>{isFunction(renderError) ? renderError(error) : renderError}</>
   }
 
-  if ((data === undefined || data === null) && !allowMissingData) {
+  if (!hasData && !allowMissingData) {
     throw new Error(
       'Data passed into AsyncView was null or undefined. Use allowMissingData=true if this is intended.',
     )
