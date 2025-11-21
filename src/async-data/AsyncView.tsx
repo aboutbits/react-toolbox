@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { isFunction } from '../util'
 
 type LoadingFunction = () => ReactNode
@@ -8,7 +8,7 @@ type ErrorFunction<Error> = (error: NonNullable<Error>) => ReactNode
 type Props<Data, Error> = {
   data?: Data
   error?: Error
-  isLoading: boolean
+  isLoading?: boolean
   renderLoading?: ReactNode | LoadingFunction
   renderError?: ReactNode | ErrorFunction<Error>
 } & (
@@ -36,15 +36,18 @@ const AsyncView = <Data, Error>(
     allowMissingData = false,
   } = props
 
-  if (isLoading) {
+  const isError = error !== null && error !== undefined
+  const hasData = data !== null && data !== undefined
+
+  if (isLoading || (isLoading === undefined && !hasData && !isError)) {
     return <>{isFunction(renderLoading) ? renderLoading() : renderLoading}</>
   }
 
-  if (error !== null && error !== undefined) {
+  if (isError) {
     return <>{isFunction(renderError) ? renderError(error) : renderError}</>
   }
 
-  if ((data === undefined || data === null) && !allowMissingData) {
+  if (!hasData && !allowMissingData) {
     throw new Error(
       'Data passed into AsyncView was null or undefined. Use allowMissingData=true if this is intended.',
     )
