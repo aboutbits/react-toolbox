@@ -6,9 +6,21 @@ type SuccessFunction<Data> = (data: Data) => ReactNode
 type ErrorFunction<Error> = (error: NonNullable<Error>) => ReactNode
 
 type Props<Data, Error> = {
-  data?: Data
-  error?: Error
-  isLoading?: boolean
+  /**
+   * The async data to show.
+   * Note that `error` and `isLoading` take precedence over data.
+   */
+  data: Data | undefined
+  /**
+   * Set an error to show the error state.
+   * Note that `isLoading` takes precedence over error.
+   */
+  error: Error | undefined
+  /**
+   * Set to a boolean value to explicitly control loading state.
+   * If undefined, loading state is shown when there is no data (null | undefined) and no error (null | undefined).
+   */
+  isLoading: boolean | undefined
   renderLoading?: ReactNode | LoadingFunction
   renderError?: ReactNode | ErrorFunction<Error>
 } & (
