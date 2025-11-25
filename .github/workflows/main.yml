@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
           registry-url: 'https://npm.pkg.github.com'
-          registry-token: ${{ secrets.GITHUB_TOKEN }}
+          registry-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       - name: Lint
         run: npm run lint
         shell: bash
@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
           registry-url: 'https://npm.pkg.github.com'
-          registry-token: ${{ secrets.GITHUB_TOKEN }}
+          registry-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       - name: Test
         run: npm run test
         shell: bash
