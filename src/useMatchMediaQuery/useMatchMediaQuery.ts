@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 function useMatchMediaQuery(query: string): boolean | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (typeof window !== 'object' || !window.matchMedia) {
     return
   }
@@ -18,12 +19,14 @@ function useMatchMediaQuery(query: string): boolean | undefined {
       setMatches(media.matches)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (media.addEventListener) {
       media.addEventListener('change', listener)
     }
 
     return () => {
-      media.removeEventListener && media.removeEventListener('change', listener)
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      media.removeEventListener?.('change', listener)
     }
   }, [matches, query])
 

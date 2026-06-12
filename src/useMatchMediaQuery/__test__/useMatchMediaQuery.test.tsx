@@ -1,11 +1,10 @@
 import { RenderResult, render } from '@testing-library/react'
 import isMatching from 'css-mediaquery'
-import React from 'react'
 import { useMatchMediaQuery } from '../useMatchMediaQuery'
 
 beforeEach(() => {
   // mock window.matchMedia (use 'css-mediaquery')
-  window.matchMedia = jest.fn().mockImplementation((query) => {
+  window.matchMedia = jest.fn().mockImplementation((query: string) => {
     return {
       addListener: jest.fn(),
       media: query,

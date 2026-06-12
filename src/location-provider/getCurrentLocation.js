@@ -4,14 +4,14 @@ const getCurrentLocation = (highAccuracy = false) => {
       resolve(position)
     }
     const errorCallback = (error) => {
-      reject(error.message)
+      reject(new Error(error.message))
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
         enableHighAccuracy: highAccuracy,
       })
     } else {
-      reject('Geolocation not supported')
+      reject(new Error('Geolocation not supported'))
     }
   })
 }

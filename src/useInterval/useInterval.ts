@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-type Callback = () => unknown | void
+type Callback = () => unknown
 type Delay = number | null
 
 const useInterval = (callback: Callback, delay: Delay): void => {
