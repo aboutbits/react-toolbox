@@ -6,14 +6,6 @@ export default defineConfig([
   ts,
   jest,
   {
-    rules: {
-      'import/namespace': 'off',
-      'import/order': 'error',
-      '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-    },
-  },
-  {
     ignores: ['node_modules', 'dist'],
   },
 ])
