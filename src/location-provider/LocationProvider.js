@@ -1,6 +1,5 @@
+import { createContext, useEffect, useState } from 'react'
 import { jsx as _jsx } from 'react/jsx-runtime'
-import { useEffect, useState } from 'react'
-import { createContext } from 'react'
 import { useInterval } from '../index'
 import { getCurrentLocation } from './getCurrentLocation'
 export const LocationContext = createContext({
@@ -25,5 +24,5 @@ export const LocationProvider = ({ highAccuracy, delay, children }) => {
   useInterval(() => {
     updateLocation()
   }, delay)
-  return _jsx(LocationContext.Provider, { value: location, children: children })
+  return _jsx(LocationContext.Provider, { value: location, children })
 }

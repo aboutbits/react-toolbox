@@ -1,18 +1,22 @@
 import { useEffect, useRef } from 'react'
 
-type Callback = () => unknown | void
+type Callback = () => unknown
 type Delay = number | null
 
 const useInterval = (callback: Callback, delay: Delay): void => {
   const savedCallback = useRef<Callback | null>(null)
 
   useEffect(() => {
-    if (delay === null) return
+    if (delay === null) {
+      return
+    }
     savedCallback.current = callback
   })
 
   useEffect(() => {
-    if (delay === null) return
+    if (delay === null) {
+      return
+    }
 
     const tick = (): void => {
       if (savedCallback.current !== null) {
@@ -20,7 +24,9 @@ const useInterval = (callback: Callback, delay: Delay): void => {
       }
     }
     const id = setInterval(tick, delay)
-    return (): void => clearInterval(id)
+    return (): void => {
+      clearInterval(id)
+    }
   }, [delay])
 }
 

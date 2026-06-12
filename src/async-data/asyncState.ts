@@ -15,9 +15,9 @@ enum AsyncState {
  * inference.
  */
 const getAsyncState = (data: unknown, error: unknown): AsyncState => {
-  if (error != null && error != undefined) {
+  if (error !== null && error !== undefined) {
     return AsyncState.FINISHED_WITH_ERROR
-  } else if (data != null && data != undefined) {
+  } else if (data !== null && data !== undefined) {
     return AsyncState.FINISHED_WITH_SUCCESS
   } else {
     return AsyncState.FETCHING
