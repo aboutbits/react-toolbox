@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { createContext } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useInterval } from '../index'
 import { getCurrentLocation } from './getCurrentLocation'
 

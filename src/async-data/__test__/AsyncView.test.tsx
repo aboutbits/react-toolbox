@@ -1,5 +1,5 @@
+import { RenderResult, render } from '@testing-library/react'
 import React from 'react'
-import { render, RenderResult } from '@testing-library/react'
 import { AsyncView } from '../AsyncView'
 
 type Data = {

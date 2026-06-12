@@ -1,6 +1,6 @@
-import React from 'react'
+import { RenderResult, render } from '@testing-library/react'
 import isMatching from 'css-mediaquery'
-import { render, RenderResult } from '@testing-library/react'
+import React from 'react'
 import { useMatchMediaQuery } from '../useMatchMediaQuery'
 
 beforeEach(() => {
@@ -18,7 +18,9 @@ beforeEach(() => {
 
 const TestComponent = ({ query }: { query: string }) => {
   const isMatched = useMatchMediaQuery(query)
-  if (isMatched) return <div>visible</div>
+  if (isMatched) {
+    return <div>visible</div>
+  }
   return <div>hidden</div>
 }
 
