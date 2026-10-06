@@ -8,13 +8,13 @@ concurrency:
 
 jobs:
   checks:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     strategy:
       matrix:
         node_version: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
@@ -28,13 +28,13 @@ jobs:
         shell: bash
 
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     strategy:
       matrix:
         node_version: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: aboutbits/github-actions-node/setup-and-install@v3
         with:
           node-version: ${{ matrix.node_version }}
